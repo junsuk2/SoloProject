@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.regionMapper">
+	
+	<select id="selectAllRegion" resultMap="regionbase">
+	select *
+	from regions
+	</select>
+	
+	<select id="selectRegionId" parameterType="int" resultMap="regionbase">
+	select *
+	from regions
+	where region_id=#{regionId}
+	</select>
+	
+	<insert id="insertRegion" parameterType="region">
+		insert into
+		regions(region_id, region_name)
+	 	values(#{regionId},#{regionName})
+	</insert>
+	
+	<update id="updateRegion" parameterType="region">
+		update regions 
+		set region_name = #{regionName}
+		where region_id =#{regionId}
+	</update>
+	
+	<delete id="deleteRegion" parameterType="region">
+		delete regions
+		where Region_id=#{regionID}
+	</delete>
+		
+	<resultMap type="region" id="regionbase">
+	<result column="region_id" property="regionId"/>
+	<result column="region_name" property="regionName"/>
+	</resultMap>
+	
+	
+</mapper> 
+

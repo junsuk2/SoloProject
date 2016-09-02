@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+	.title{
+		text-align:center;
+	}
+
+	#loginArea{
+		text-align:right;
+	}
+	
+	.horMenu{
+		text-align:right;
+	}
+	
+	.horMenu li{
+		display: inline-block;
+		padding: 0px 20px;	
+	}
+	
