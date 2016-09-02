@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.employeeMapper">
+	
+	<select id="selectAll" parameterType="employee" resultMap="employeebase">
+	select employee_id, email, hire_date, job_title, salary
+	from employees e, jobs j
+	where e.job_id=j.job_id
+	</select> 
+	
+	<insert id="insertEmployee" parameterType="employee">
+		insert into employees(employee_id,email,hire_date,job_id,salary)
+		values(1000,#{email},sysdate,#{jobId},1500)
+	</insert>
+	
+	<select id="selectById" parameterType="employee" resultMap="employeebase">
+	select employee_id, email, hire_date, job_title, salary
+	from employees e, jobs j
+	where e.job_id=j.job_id and employee_id=#{employeeId}
+	</select>	
+	
+	<update id="updateEmployee" parameterType="employee">
+		update employees 
+		set job_id=#{jobId},  salary=#{salary}
+		where employee_id =#{employeeId}
+	</update>
+		
+	<delete id="deleteEmployee" parameterType="employee">
+		delete employees
+		where employee_id=#{employeeId}
+	</delete>
+	
+	<select id="sortByDate" parameterType="String" resultMap="employeebase">
+	select employee_id, email, hire_date, job_title, salary
+	from employees e, jobs j
+	where e.job_id=j.job_id and to_char(hire_date,'YYYY') LIKE '%'||#{hireDate}||'%'
+	</select>
+	
+	<select id="sortById" parameterType="String" resultMap="employeebase">
+	select employee_id, email, hire_date, job_title, salary
+	from employees e, jobs j
+	where e.job_id=j.job_id and UPPER(email) LIKE UPPER('%'||#{email}||'%')
+	</select>
+	
+	<select id="selectAllbyAsc" parameterType="employee" resultMap="employeebase">
+	select employee_id, email, hire_date, job_title, salary
+	from employees e, jobs j
+	where e.job_id=j.job_id
+	order by salary asc
+	</select> 
+	
+	<select id="selectAllbyDesc" parameterType="employee" resultMap="employeebase">
+	select employee_id, email, hire_date, job_title, salary
+	from employees e, jobs j
+	where e.job_id=j.job_id
+	order by salary desc
+	</select> 
+	
+	<resultMap type="employee" id="employeebase">
+	<result column="employee_id" property="employeeId"/>
+	<result column="email" property="email"/>
+	<result column="hire_date" property="hireDate"/>
+	<result column="job_id" property="jobId"/>
+	<result column="salary" property="salary"/>
+	</resultMap>
+	
+	
+	
+</mapper> 
+
